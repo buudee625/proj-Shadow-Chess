@@ -1,64 +1,87 @@
 console.log('OK');
 
+// Constants
+//==============================================//
 const pieces = {
-    red: {
         king: {
             beats: ['queen', 'rook', 'bishop', 'knight', 'catapult'],
-            count: 1
+            flipped: false,
+            imgUrl: ''
         },
         queen: {
             beats: ['rook', 'bishop', 'knight', 'pawn', 'catapult'],
-            count: 2
+            flipped: false,
+            imgUrl: ''
         },
         rook: {
             beats: ['bishop', 'knight', 'pawn', 'catapult'],
-            count: 2
+            flipped: false,
+            imgUrl: ''
         },
         bishop: {
             beats: ['knight', 'pawn', 'catapult'],
-            count: 2
+            flipped: false,
+            imgUrl: ''
         },
         knight: {
             beats: ['pawn', 'catapult'],
-            count: 2
+            flipped: false,
+            imgUrl: ''
         },
         pawn: {
             beats: ['king'],
-            count: 5
+            flipped: false,
+            imgUrl: ''
         },
         catapult: {
             beats: ['king', 'queen', 'rook', 'bishop', 'knight', 'catapult', 'pawn'],
-            count: 2
+            flipped: false,
+            imgUrl: ''
         },
-    },
-    black: {
-        king: {
-            beats: ['queen', 'rook', 'bishop', 'knight', 'catapult'],
-            count: 1
-        },
-        queen: {
-            beats: ['rook', 'bishop', 'knight', 'pawn', 'catapult'],
-            count: 2
-        },
-        rook: {
-            beats: ['bishop', 'knight', 'pawn', 'catapult'],
-            count: 2
-        },
-        bishop: {
-            beats: ['knight', 'pawn', 'catapult'],
-            count: 2
-        },
-        knight: {
-            beats: ['pawn', 'catapult'],
-            count: 2
-        },
-        pawn: {
-            beats: ['king'],
-            count: 5
-        },
-        catapult: {
-            beats: ['king', 'queen', 'rook', 'bishop', 'knight', 'catapult', 'pawn'],
-            count: 2
-        },
-    }
 }
+
+const table = {
+    //pieces: ,
+    //remainder: 
+};
+
+//State variables
+//==============================================//
+let redPlayer = {
+    urTurn: true,
+};
+
+const bluePlayer = {
+    urTurn: false,
+};
+
+
+}
+
+//Cached Elements
+//==============================================//
+
+
+//Event Listeners
+//==============================================//
+
+
+//Functions
+//==============================================//
+function init(){
+    // needs to randomly distribute all pieces on the board faced down
+    
+    // needs to render the graphic element so the players can see the pieces
+};
+
+function move(){
+
+};
+
+function gridCheck(){
+
+};
+
+function canBeat(){
+
+};

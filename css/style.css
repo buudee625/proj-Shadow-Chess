@@ -1,0 +1,61 @@
+body {
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-areas: 
+        "hdr hdr hdr"
+        "blueside sec redside"
+        "ftr ftr ftr";
+    font-family: Helvetica;
+}
+
+td {
+    background-color: #cfa356;
+    width: 65px;
+    height: 65px;
+    text-align: center;
+}
+
+header {
+    grid-area: hdr;
+    background-color: #4c4c4c;
+}
+
+section {
+    height: 400px;
+    grid-area: sec;
+    background-color: #727272;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    grid-area: ftr;
+    background-color: #4c4c4c;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.blue-side {
+    grid-area: blueside;
+    background-color: #5998c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red-side {
+    grid-area: redside;
+    background-color: #c41e3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
