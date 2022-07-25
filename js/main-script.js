@@ -112,8 +112,11 @@ tableEl.addEventListener('click', function(e){
         selectedCell = document.getElementById(elmID);
         console.log('cell selected')
     };
-    if (selectedPiece !== '' && selectedCell !== '') {
+    if (selectedPiece !== undefined && selectedCell !== undefined) {
+        console.log(selectedPiece, '< selected piece');
+        console.log(selectedCell, '< seelected cell');
         selectedCell.appendChild(selectedPiece);
+        
     };
     // testPrint(selectedCell);
     // testPrint(elmClass);
