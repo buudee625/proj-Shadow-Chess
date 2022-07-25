@@ -101,14 +101,20 @@ let elmPiece;
 let selectedCell;
 let selectedPiece; 
 tableEl.addEventListener('click', function(e){
-    elmID = e.target.id;
+    
     elmClass = e.target.className;
     if (e.target.classList.contains('piece-btn')) {
+        elmID = e.target.id;
         selectedPiece = document.getElementById(elmID);
-    }
-    selectedCell = document.getElementById(elmID);
-    selectedCell.appendChild(selectedPiece);
-
+        console.log('button selected')
+    } else if (e.target.classList.contains('cell')) {
+        elmID = e.target.id;
+        selectedCell = document.getElementById(elmID);
+        console.log('cell selected')
+    };
+    if (selectedPiece !== '' && selectedCell !== '') {
+        selectedCell.appendChild(selectedPiece);
+    };
     // testPrint(selectedCell);
     // testPrint(elmClass);
 });
