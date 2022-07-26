@@ -60,9 +60,8 @@ const bluePlayer = {
 //==============================================//
 
 const tableEl = document.querySelector('.main-board') // the table
-const cellEl = document.querySelectorAll('td') // all cells
+const allCellsEl = document.querySelectorAll('td') // all cells
 let pieceEl = document.querySelectorAll('button') // all playable pieces
-
 
 
 //Functions
@@ -73,6 +72,8 @@ function init(){
     // needs to randomly distribute all pieces on the board faced down
     
     // needs to render the graphic element so the players can see the pieces
+
+    //  
 };
 
 function selectPiece(){
@@ -101,45 +102,62 @@ let elmPiece;
 let selectedCell;
 let selectedPiece; 
 
-const pieceElm = document.querySelector('.piece-btn');
-console.log(pieceEl);
-
-// tableEl.addEventListener('click', function(e){
-//     elmID = e.target.id;
-//     console.log(elmID);
-//     const blueSide = document.querySelector('.blue-side > p');
-//     const redSide = document.querySelector('.red-side > p');
-//     redSide.innerText = elmID;
-//     blueSide.innerText = elmID;
-// });
+// const pieceElm = document.querySelector('.piece-btn');
+// console.log(pieceEl);
 
 for (const pieceBtn of document.querySelectorAll('.piece-btn')){
         pieceBtn.addEventListener('dragstart', function(e){
             e.dataTransfer.setData('text/plain', e.target.id);
     });
-}
+};
 
-for (const cells of document.querySelectorAll('.cell')){
-    // change the opacity of the cell when a piece is dragged over it 
-    cells.addEventListener('dragover', function(e){
-        e.preventDefault();
-        cells.style.opacity = '0.5'
+let moveUpID;
+let moveDownID;
+let moveRightID;
+let moveLeftID;
+tableEl.addEventListener('dragstart', function(e){
+    cellID = document.getElementById(e.target.id).parentElement.id;
+    moveUpID = parseInt(cellID) - 8;
+    moveRightID = parseInt(cellID) + 1;
+    moveDownID = parseInt(cellID) + 8;
+    moveLeftID = parseInt(cellID) - 1;
+    const validMoveCells = [
+        document.getElementById(moveUpID),
+        document.getElementById(moveRightID),
+        document.getElementById(moveDownID),
+        document.getElementById(moveLeftID) 
+    ];
+    console.log(validMoveCells)
 
-    });
-    // the drop function  
-    cells.addEventListener('drop', function(e){
-        e.preventDefault();
-        // when the drop event occurs, defines the id of the element and store it in a variable as a string
-        const droppedPieceId = e.dataTransfer.getData('text/plain');
-        // use this id to select it so it can be appended by using .appendChild()
-        const droppedPiece = document.getElementById(droppedPieceId);
-        cells.appendChild(droppedPiece);
-    });
-    // returns the opacity after the drag event leaves the cell
-    cells.addEventListener('dragleave', function(e){
-        cells.style.opacity = '1';
-    });
-}
+    for (const cells of validMoveCells){
+        // change the opacity of the cell when a piece is dragged over it 
+        cells.addEventListener('dragover', function(e){
+            e.preventDefault();
+            cells.style.opacity = '0.5'
+    
+        });
+        // the drop function  
+        cells.addEventListener('drop', function(e){
+            e.preventDefault();
+            // when the drop event occurs, defines the id of the element and store it in a variable as a string
+            const droppedPieceId = e.dataTransfer.getData('text/plain');
+            // use this id to select it so it can be appended by using .appendChild()
+            const droppedPiece = document.getElementById(droppedPieceId);
+            cells.appendChild(droppedPiece);
+        });
+        // returns the opacity after the drag event leaves the cell
+        cells.addEventListener('dragleave', function(e){
+            cells.style.opacity = '1';
+        });
+        cells.addEventListener('dragend', function(e){
+            cells.style.opacity = '1';
+        });
+        
+    }
+    
+});
+
+
 
 
 
