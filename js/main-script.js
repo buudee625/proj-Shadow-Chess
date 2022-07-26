@@ -100,7 +100,8 @@ let btnID;
 let elmClass; 
 let elmPiece;
 let selectedCell;
-let selectedPiece; 
+let selectedPieceID; 
+let occupantPieceID;
 
 // const pieceElm = document.querySelector('.piece-btn');
 // console.log(pieceEl);
@@ -108,6 +109,7 @@ let selectedPiece;
 for (const pieceBtn of document.querySelectorAll('.piece-btn')){
         pieceBtn.addEventListener('dragstart', function(e){
             e.dataTransfer.setData('text/plain', e.target.id);
+            selectedPieceID = e.target.id;
     });
 };
 
@@ -121,7 +123,7 @@ tableEl.addEventListener('dragstart', function(e){
     moveRightID = parseInt(cellID) + 1;
     moveDownID = parseInt(cellID) + 8;
     moveLeftID = parseInt(cellID) - 1;
-    const validMoveCells = [
+    let validMoveCells = [
         document.getElementById(moveUpID),
         document.getElementById(moveRightID),
         document.getElementById(moveDownID),
@@ -134,6 +136,7 @@ tableEl.addEventListener('dragstart', function(e){
         cells.addEventListener('dragover', function(e){
             e.preventDefault();
             cells.style.opacity = '0.5'
+            
     
         });
         // the drop function  
@@ -143,14 +146,22 @@ tableEl.addEventListener('dragstart', function(e){
             const droppedPieceId = e.dataTransfer.getData('text/plain');
             // use this id to select it so it can be appended by using .appendChild()
             const droppedPiece = document.getElementById(droppedPieceId);
-            cells.appendChild(droppedPiece);
+
+            occupantPieceID = cells.children[0].id;
+            if (pieces[selectedPieceID].beats.includes(occupantPieceID)) {
+                cells.appendChild(droppedPiece);
+            }
+
+            
         });
         // returns the opacity after the drag event leaves the cell
         cells.addEventListener('dragleave', function(e){
             cells.style.opacity = '1';
+            validMoveCells = [];
         });
         cells.addEventListener('dragend', function(e){
             cells.style.opacity = '1';
+            validMoveCells = [];
         });
         
     }
@@ -189,14 +200,5 @@ tableEl.addEventListener('dragstart', function(e){
 // });
 
 
-
-
-
-
-
-
-// 1. click a piece element, grabs the element by using event listner 
-
-// 2. click a cell, append the grabbed piece to the cell identified by its ID
 
 

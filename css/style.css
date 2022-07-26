@@ -7,13 +7,29 @@ body {
         "blueside sec redside"
         "ftr ftr ftr";
     font-family: Helvetica;
+    background-color: #4c4c4c;
 }
 
-td {
-    background-color: #cfa356;
+.main-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+.cell {
     width: 65px;
     height: 65px;
     text-align: center;
+    color:azure;
+    border: 1px solid azure;
+}
+
+img {
+    height: 30px;
+    width: 30px;
+    padding: 8px;
+    
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: azure;
 }
 
 header {
@@ -24,7 +40,6 @@ header {
 section {
     height: 400px;
     grid-area: sec;
-    background-color: #727272;
     display: flex;
     justify-content: center;
     align-items: center;
