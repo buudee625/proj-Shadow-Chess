@@ -101,7 +101,15 @@ let elmClass;
 let elmPiece;
 let selectedCell;
 let selectedPieceID; 
+let selectedPiece; 
 let occupantPieceID;
+let occupantPiece;
+let moveUpID;
+let moveDownID;
+let moveRightID;
+let moveLeftID;
+let footDiv;
+let validMoveCell = [];
 
 // const pieceElm = document.querySelector('.piece-btn');
 // console.log(pieceEl);
@@ -109,27 +117,24 @@ let occupantPieceID;
 for (const pieceBtn of document.querySelectorAll('.piece-btn')){
         pieceBtn.addEventListener('dragstart', function(e){
             e.dataTransfer.setData('text/plain', e.target.id);
-            selectedPieceID = e.target.id;
+            selectedPieceID = e.dataTransfer.getData('text/plain')
+            selectedPiece = document.getElementById(selectedPieceID);
     });
 };
 
-let moveUpID;
-let moveDownID;
-let moveRightID;
-let moveLeftID;
+
 tableEl.addEventListener('dragstart', function(e){
     cellID = document.getElementById(e.target.id).parentElement.id;
     moveUpID = parseInt(cellID) - 8;
     moveRightID = parseInt(cellID) + 1;
     moveDownID = parseInt(cellID) + 8;
     moveLeftID = parseInt(cellID) - 1;
-    let validMoveCells = [
+    validMoveCells = [
         document.getElementById(moveUpID),
         document.getElementById(moveRightID),
         document.getElementById(moveDownID),
         document.getElementById(moveLeftID) 
     ];
-    console.log(validMoveCells)
 
     for (const cells of validMoveCells){
         // change the opacity of the cell when a piece is dragged over it 
@@ -142,17 +147,20 @@ tableEl.addEventListener('dragstart', function(e){
         // the drop function  
         cells.addEventListener('drop', function(e){
             e.preventDefault();
-            // when the drop event occurs, defines the id of the element and store it in a variable as a string
-            const droppedPieceId = e.dataTransfer.getData('text/plain');
-            // use this id to select it so it can be appended by using .appendChild()
-            const droppedPiece = document.getElementById(droppedPieceId);
 
-            occupantPieceID = cells.children[0].id;
-            if (pieces[selectedPieceID].beats.includes(occupantPieceID)) {
-                cells.appendChild(droppedPiece);
+            // conditional for moving to empty cell
+            if (cells.children[0] == null) {
+                cells.appendChild(selectedPiece);
+            } else {
+                occupantPieceID = cells.children[0].id;
+                if (pieces[selectedPieceID].beats.includes(occupantPieceID)) {
+                    cells.appendChild(selectedPiece);
+                    footDiv = document.querySelector('footer');
+                    occupantPiece = document.getElementById(occupantPieceID);
+                    footDiv.appendChild(occupantPiece);
+                    occupantPiece.setAttribute('draggable', 'false');
+                }
             }
-
-            
         });
         // returns the opacity after the drag event leaves the cell
         cells.addEventListener('dragleave', function(e){
