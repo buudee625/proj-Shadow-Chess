@@ -12,7 +12,7 @@
 <header>header</header>
 <section>
     <div class="main-board">
-            <div class="cell" id="1">1<img class="piece-btn" id="queen" draggable="true" src="img/2-queen.png" ></div>
+            <div class="cell" id="1">1</div>
             <div class="cell" id="2">2</div>
             <div class="cell" id="3">3</div>
             <div class="cell" id="4">4</div>
@@ -21,15 +21,15 @@
             <div class="cell" id="7">7</div>
             <div class="cell" id="8">8</div>
             <div class="cell" id="9">9</div>
-            <div class="cell" id="10">10</div>
+            <div class="cell" id="10">10<button class="red" id="rook">ROOK</button></div>
             <div class="cell" id="11">11</div>
             <div class="cell" id="12">12</div>
-            <div class="cell" id="13">13<button class="piece-btn" id="king" draggable="true">KING</button></div>
-            <div class="cell" id="14">14<button class="piece-btn" id="pawn" draggable="true">PAWN</button></div>
+            <div class="cell" id="13">13<button class="red" id="king">KING</button></div>
+            <div class="cell" id="14">14<button class="blue" id="pawn">PAWN</button></div>
             <div class="cell" id="15">15</div>
             <div class="cell" id="16">16</div>
             <div class="cell" id="17">17</div>
-            <div class="cell" id="18">18</div>
+            <div class="cell" id="18">18<button class="blue" id="king">KING</button></div>
             <div class="cell" id="19">19</div>
             <div class="cell" id="20">20</div>
             <div class="cell" id="21">21</div>
@@ -43,7 +43,7 @@
             <div class="cell" id="29">29</div>
             <div class="cell" id="30">30</div>
             <div class="cell" id="31">31</div>
-            <div class="cell" id="32">32<button class="piece-btn" id="king" draggable="true">KING</button></div>
+            <div class="cell" id="32">32</div>
     </div>
 </section>
 <side class="blue-side">
@@ -52,7 +52,10 @@
 <side class="red-side">
     <p>Redd<br>selects:</p>
 </side>
-<footer>footer
+<footer>
+    <div class="defeat-zone">
+        Defeated Pieces:
+    </div>
 </footer>
 </body>
 </html>

@@ -7,37 +7,37 @@ const pieces = {
         king: {
             beats: ['king', 'queen', 'rook', 'bishop', 'knight', 'catapult'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: 'img/1-king.png'
         },
         queen: {
             beats: ['queen', 'rook', 'bishop', 'knight', 'pawn', 'catapult'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: 'img/2-queen.png'
         },
         rook: {
             beats: ['rook', 'bishop', 'knight', 'pawn', 'catapult'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: 'img/3-rook.png'
         },
         bishop: {
             beats: ['bishop', 'knight', 'pawn', 'catapult'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: 'img/4-bishop.png'
         },
         knight: {
             beats: ['knight', 'pawn', 'catapult'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: 'img/5-knight.png'
         },
         pawn: {
             beats: ['pawn', 'king'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: 'img/6-pawn.png'
         },
         catapult: {
             beats: ['king', 'queen', 'rook', 'bishop', 'knight', 'pawn', 'catapult'],
             flipped: false,
-            imgUrl: ''
+            imgUrl: '7-catapult.png'
         },
 }
 
@@ -48,13 +48,9 @@ const table = {
 
 //State variables
 //==============================================//
-let redPlayer = {
-    urTurn: true,
-};
+let turnCounter = true; //true = red's turn; false = blue's turn
 
-const bluePlayer = {
-    urTurn: false,
-};
+
 
 //Cached Elements
 //==============================================//
@@ -66,14 +62,47 @@ let pieceEl = document.querySelectorAll('button') // all playable pieces
 
 //Functions
 //==============================================//
-
-
 function init(){
     // needs to randomly distribute all pieces on the board faced down
     
     // needs to render the graphic element so the players can see the pieces
 
-    //  
+    // 
+    switchTurn(); 
+};
+init();
+
+function switchTurn(){
+    // select all pieces by using the color class
+    // since querySelectorAll returns nodeList, we will need to iterate thr
+    const redBtns = document.querySelectorAll('.red');
+    const blueBtns = document.querySelectorAll('.blue');
+
+    // setting the draggable attribute base on who's turn it is 
+    if (turnCounter === true) {
+        redBtns.forEach(function(rBtn){
+            blueBtns.forEach(function(bBtn){
+                bBtn.setAttribute('draggable', 'false');
+            });
+            rBtn.setAttribute('draggable', 'true');
+            turnCounter = false;
+            console.log('red turn');
+        });
+    } else if (turnCounter === false) {
+        blueBtns.forEach(function(bBtn){
+            redBtns.forEach(function(rBtn){
+                rBtn.setAttribute('draggable', 'false');
+            });
+            bBtn.setAttribute('draggable', 'true');
+            turnCounter = true;
+            console.log('blue turn');
+        });
+    }
+}
+
+function moveableCells(){
+    
+    return validMoveArr;
 };
 
 function selectPiece(){
@@ -94,12 +123,8 @@ function canBeat(){
 
 //Event Listeners
 //==============================================//
-let elmID;
+
 let cellID;
-let btnID;
-let elmClass; 
-let elmPiece;
-let selectedCell;
 let selectedPieceID; 
 let selectedPiece; 
 let occupantPieceID;
@@ -109,12 +134,10 @@ let moveDownID;
 let moveRightID;
 let moveLeftID;
 let footDiv;
-let validMoveCell = [];
+let validMoveArr = [];
 
-// const pieceElm = document.querySelector('.piece-btn');
-// console.log(pieceEl);
 
-for (const pieceBtn of document.querySelectorAll('.piece-btn')){
+for (const pieceBtn of document.querySelectorAll('button')){
         pieceBtn.addEventListener('dragstart', function(e){
             e.dataTransfer.setData('text/plain', e.target.id);
             selectedPieceID = e.dataTransfer.getData('text/plain')
@@ -122,90 +145,56 @@ for (const pieceBtn of document.querySelectorAll('.piece-btn')){
     });
 };
 
-
 tableEl.addEventListener('dragstart', function(e){
     cellID = document.getElementById(e.target.id).parentElement.id;
     moveUpID = parseInt(cellID) - 8;
     moveRightID = parseInt(cellID) + 1;
     moveDownID = parseInt(cellID) + 8;
     moveLeftID = parseInt(cellID) - 1;
-    validMoveCells = [
+    validMoveArr = [
         document.getElementById(moveUpID),
         document.getElementById(moveRightID),
         document.getElementById(moveDownID),
         document.getElementById(moveLeftID) 
     ];
-
-    for (const cells of validMoveCells){
+    for (const cells of validMoveArr){
         // change the opacity of the cell when a piece is dragged over it 
         cells.addEventListener('dragover', function(e){
             e.preventDefault();
             cells.style.opacity = '0.5'
-            
-    
         });
         // the drop function  
         cells.addEventListener('drop', function(e){
-            e.preventDefault();
-
+            e.preventDefault();          
             // conditional for moving to empty cell
             if (cells.children[0] == null) {
                 cells.appendChild(selectedPiece);
             } else {
                 occupantPieceID = cells.children[0].id;
-                if (pieces[selectedPieceID].beats.includes(occupantPieceID)) {
-                    cells.appendChild(selectedPiece);
-                    footDiv = document.querySelector('footer');
-                    occupantPiece = document.getElementById(occupantPieceID);
-                    footDiv.appendChild(occupantPiece);
-                    occupantPiece.setAttribute('draggable', 'false');
-                }
+            }
+            if (pieces[selectedPieceID].beats.includes(occupantPieceID)) {
+                cells.appendChild(selectedPiece);
+                footDiv = document.querySelector('footer');
+                occupantPiece = document.getElementById(occupantPieceID);
+                footDiv.appendChild(occupantPiece);
+                occupantPiece.setAttribute('draggable', 'false');
             }
         });
         // returns the opacity after the drag event leaves the cell
         cells.addEventListener('dragleave', function(e){
             cells.style.opacity = '1';
-            validMoveCells = [];
+            validMoveArr = [];
         });
+
         cells.addEventListener('dragend', function(e){
             cells.style.opacity = '1';
-            validMoveCells = [];
+            validMoveArr = [];
+            switchTurn();
+            console.log(turnCounter);
         });
-        
     }
-    
 });
 
-
-
-
-
-
-
-// Moving logic (may not be used)
-//==============================================//
-// tableEl.addEventListener('click', function(e){
-    
-//     elmClass = e.target.className;
-//     if (e.target.classList.contains('piece-btn')) {
-//         elmID = e.target.id;
-//         selectedPiece = document.getElementById(elmID);
-//         console.log('button selected')
-//     } else if (e.target.classList.contains('cell')) {
-//         elmID = e.target.id;
-//         selectedCell = document.getElementById(elmID);
-//         console.log('cell selected')
-//     };
-//     if (selectedPiece !== undefined && selectedCell !== undefined) {
-//         console.log(selectedPiece, '< selected piece');
-//         console.log(selectedCell, '< seelected cell');
-//         selectedCell.appendChild(selectedPiece);
-        
-//     };
-
-    // testPrint(selectedCell);
-    // testPrint(elmClass);
-// });
 
 
 
