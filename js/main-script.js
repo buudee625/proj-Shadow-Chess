@@ -49,15 +49,25 @@ const table = {
 //State variables
 //==============================================//
 let turnCounter = true; //true = red's turn; false = blue's turn
-
-
+let cellID;
+let selectedPieceID; 
+let selectedPiece; 
+let occupantPieceID;
+let occupantPiece;
+let moveUpID;
+let moveDownID;
+let moveRightID;
+let moveLeftID;
+let footDiv;
+let validMoveArr = [];
 
 //Cached Elements
 //==============================================//
 
-const tableEl = document.querySelector('.main-board') // the table
-const allCellsEl = document.querySelectorAll('td') // all cells
-let pieceEl = document.querySelectorAll('button') // all playable pieces
+const tableEl = document.querySelector('.main-board'); // the table element
+const blueBox = document.querySelector('.blue-side');
+const redBox = document.querySelector('.red-side');
+
 
 
 //Functions
@@ -85,23 +95,35 @@ function switchTurn(){
                 bBtn.setAttribute('draggable', 'false');
             });
             rBtn.setAttribute('draggable', 'true');
-            turnCounter = false;
-            console.log('red turn');
         });
+        redBox.style.border = '5px solid #c41e3d';
+        blueBox.style.border = '5px solid #4c4c4c';
+        turnCounter = false;
     } else if (turnCounter === false) {
         blueBtns.forEach(function(bBtn){
             redBtns.forEach(function(rBtn){
                 rBtn.setAttribute('draggable', 'false');
             });
             bBtn.setAttribute('draggable', 'true');
-            turnCounter = true;
-            console.log('blue turn');
         });
+        redBox.style.border = '5px solid #4c4c4c';
+        blueBox.style.border = '5px solid #5998c5';
+        
+        turnCounter = true;
     }
 }
 
-function moveableCells(){
-    
+function moveableCells(cellID){
+    moveUpID = parseInt(cellID) - 8;
+    moveRightID = parseInt(cellID) + 1;
+    moveDownID = parseInt(cellID) + 8;
+    moveLeftID = parseInt(cellID) - 1;
+    validMoveArr = [
+        document.getElementById(moveUpID),
+        document.getElementById(moveRightID),
+        document.getElementById(moveDownID),
+        document.getElementById(moveLeftID) 
+    ];
     return validMoveArr;
 };
 
@@ -124,39 +146,29 @@ function canBeat(){
 //Event Listeners
 //==============================================//
 
-let cellID;
-let selectedPieceID; 
-let selectedPiece; 
-let occupantPieceID;
-let occupantPiece;
-let moveUpID;
-let moveDownID;
-let moveRightID;
-let moveLeftID;
-let footDiv;
-let validMoveArr = [];
-
 
 for (const pieceBtn of document.querySelectorAll('button')){
         pieceBtn.addEventListener('dragstart', function(e){
-            e.dataTransfer.setData('text/plain', e.target.id);
-            selectedPieceID = e.dataTransfer.getData('text/plain')
+            // e.dataTransfer.setData('text/plain', e.target.id);
+            // selectedPieceID = e.dataTransfer.getData('text/plain')
+            selectedPieceID = e.target.id;
             selectedPiece = document.getElementById(selectedPieceID);
     });
 };
 
 tableEl.addEventListener('dragstart', function(e){
     cellID = document.getElementById(e.target.id).parentElement.id;
-    moveUpID = parseInt(cellID) - 8;
-    moveRightID = parseInt(cellID) + 1;
-    moveDownID = parseInt(cellID) + 8;
-    moveLeftID = parseInt(cellID) - 1;
-    validMoveArr = [
-        document.getElementById(moveUpID),
-        document.getElementById(moveRightID),
-        document.getElementById(moveDownID),
-        document.getElementById(moveLeftID) 
-    ];
+    moveableCells(cellID);
+    // moveUpID = parseInt(cellID) - 8;
+    // moveRightID = parseInt(cellID) + 1;
+    // moveDownID = parseInt(cellID) + 8;
+    // moveLeftID = parseInt(cellID) - 1;
+    // validMoveArr = [
+    //     document.getElementById(moveUpID),
+    //     document.getElementById(moveRightID),
+    //     document.getElementById(moveDownID),
+    //     document.getElementById(moveLeftID) 
+    // ];
     for (const cells of validMoveArr){
         // change the opacity of the cell when a piece is dragged over it 
         cells.addEventListener('dragover', function(e){
