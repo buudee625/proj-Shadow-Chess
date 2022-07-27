@@ -68,23 +68,23 @@ img {
 
 .blue-side {
     grid-area: blueside;
-    border: 5px solid #5998c5;
+    /* border: 5px solid #5998c5; */
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(3px 3px 4px #4444dd);
+    
     color: azure;
 }
 
 .red-side {
     grid-area: redside;
-    border: 5px solid #c41e3d;
+    /* border: 5px solid #c41e3d; */
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(3px 3px 4px #dd4498);
+    /* filter: drop-shadow(3px 3px 4px #dd4498); */
     color: azure;
 }
 
