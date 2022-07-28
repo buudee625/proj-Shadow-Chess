@@ -68,24 +68,28 @@ img {
 
 .blue-side {
     grid-area: blueside;
-    /* border: 5px solid #5998c5; */
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    text-align: center;
     color: azure;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .red-side {
     grid-area: redside;
-    /* border: 5px solid #c41e3d; */
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* filter: drop-shadow(3px 3px 4px #dd4498); */
+    text-align: center;
     color: azure;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .red {
@@ -95,3 +99,62 @@ img {
 .blue {
     background-color: #5998c5;
 }
+
+.defeated-red {
+    background-color: #c41e3d;
+}
+
+.defeated-blue {
+    background-color: #5998c5;
+}
+
+
+h1 {
+    font-family: 'Teko', sans-serif;
+    text-transform: uppercase;
+    font-size: 50px;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin: 0;
+    /* min-height: calc(100vh - 16px); */
+    background: white;
+    position: relative;
+    background: #4c4c4c;
+    color: #4c4c4c;
+}
+  
+  h1:before{
+    content: attr(data-text);
+    position: absolute;
+    background: azure;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 100% 90%;
+    line-height: 0.9;
+    clip-path: ellipse(120px 120px at -2.54% -9.25%);
+    animation: swing 5s infinite;
+    animation-direction: alternate;
+  }
+  
+  @keyframes swing{
+    0%{
+       -webkit-clip-path: ellipse(120px 120px at -2.54% -9.25%)
+      clip-path: ellipse(120px 120px at -2.54% -9.25%)
+    }
+    50%{
+      -webkit-clip-path: ellipse(120px 120px at 49.66% 64.36%);
+      clip-path: ellipse(120px 120px at 49.66% 64.36%);
+  
+    }
+    100%{
+       -webkit-clip-path: ellipse(120px 120px at 102.62% -1.61%;);
+      clip-path: ellipse(120px 120px at 102.62% -1.61%);
+    }
+  }
+  
+  
