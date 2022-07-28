@@ -110,8 +110,8 @@ img {
 
 
 h1 {
-    font-family: 'Teko', sans-serif;
-    text-transform: uppercase;
+    font-family: 'LiSong Pro', sans-serif;
+    /* text-transform: uppercase; */
     font-size: 50px;
     text-align: center;
     display: -webkit-flex;
@@ -121,7 +121,6 @@ h1 {
     -webkit-justify-content: center;
     justify-content: center;
     margin: 0;
-    /* min-height: calc(100vh - 16px); */
     background: white;
     position: relative;
     background: #4c4c4c;

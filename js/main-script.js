@@ -1,6 +1,3 @@
-const testPrint = function(test){
-    console.log(test, `<--${test}`);
-};
 // Constants
 //==============================================//
 const pieces = {
@@ -186,7 +183,7 @@ function pieceCounter(){
 };
 
 function renderText() {
-    rSideBottom.innerText = `'Remaining: 
+    rSideBottom.innerText = `Remaining: 
     ${pieceCounterRed}`;
     bSideBottom.innerText = `Remaining: 
     ${pieceCounterBlue}`;
@@ -240,9 +237,7 @@ boardEl.addEventListener('dragstart', function(e){
                 // if the target cell has no child element, append the selected piece
                 cells.appendChild(selectedPiece);
                 switchTurn();
-            // 2nd, if DC is occupied, is it a friendly piece or enemy piece?
-            } else if (cells.children[0].classList == selectedPiece.classList) {
-                alert('That would be our own troop chief!');
+            // 2nd, if DC is occupied, is it a friendly piece or enemy piece? not yet implemented.
             // 3rd, if it's an enemy piece, can user's selected piece beat the occupant piece?
             } else {
                 // grab the child element's ID but since .children returns a HTMLCollection, we have to index into the first element (No cells should have more than one child). 
