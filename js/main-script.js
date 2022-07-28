@@ -232,19 +232,20 @@ boardEl.addEventListener('dragstart', function(e){
             cells.style.opacity = '0.5'
         });
         // the drop function which requires multiple layers of logics
-        // 1st, determine whether or not the destination cell (DC) is empty
-        // 2nd, if DC is occupied, is it a friendly piece or enemy piece? (Not yet implemented)
 
-        // 3rd, if it's an enemy piece, can user's selected piece beat the occupant piece?
         cells.addEventListener('drop', function(e){
             e.preventDefault();          
-            // conditional for moving to empty cell
+             // 1st, determine whether or not the destination cell (DC) is empty
             if (cells.children[0] == null) {
                 // if the target cell has no child element, append the selected piece
                 cells.appendChild(selectedPiece);
                 switchTurn();
+            // 2nd, if DC is occupied, is it a friendly piece or enemy piece?
+            } else if (cells.children[0].classList == selectedPiece.classList) {
+                alert('That would be our own troop chief!');
+            // 3rd, if it's an enemy piece, can user's selected piece beat the occupant piece?
             } else {
-                // else, grab the child element's ID but since .children returns a HTMLCollection, we have to index into the first element (No cells should have more than one child). 
+                // grab the child element's ID but since .children returns a HTMLCollection, we have to index into the first element (No cells should have more than one child). 
                 occupantPieceID = cells.children[0].id;
                 // apply defeat logic by running thru the piece object
                 if (pieces[selectedPieceID].beats.includes(occupantPieceID)) {
