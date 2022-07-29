@@ -167,7 +167,6 @@ function moveableCells(cellID){
         document.getElementById(moveDownID),
         document.getElementById(moveLeftID) 
     ]};
-    // console.log(validMoveArr);
     return validMoveArr;
 };
 
@@ -226,8 +225,6 @@ for (const i of unflipPieces) {
 // When a drag event occurs, the code needs to identify what piece was being dragged and set it to an variable because all of the following logic requires the knowledge of which piece was selected
 for (const pieceBtn of document.querySelectorAll('button')){
         pieceBtn.addEventListener('dragstart', function(e){
-            // e.dataTransfer.setData('text/plain', e.target.id);
-            // selectedPieceID = e.dataTransfer.getData('text/plain')
             selectedPieceID = e.target.id;
             selectedPiece = document.getElementById(selectedPieceID);
             renderText();
@@ -291,10 +288,3 @@ boardEl.addEventListener('dragstart', function(e){
         });   
     }
 });
-
-
-
-// List of problems:
-// self destructing behavior (temporarily resolved)
-// no friend/foe differentiation
-// code currently cannot handle when mulitple of the same pieces are present on the board 
