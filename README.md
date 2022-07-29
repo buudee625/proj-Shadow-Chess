@@ -42,11 +42,13 @@ This is the very first wireframe draft
 ## • Current development
 The current MVP is set up for demonstration purposes only. In this demo, players are able to move pieces around, launch attack on opponent's piece or flip over one of the four undiscovered pieces. When a player flips over the undiscovered piece, the program will randomly assign it a color and rank from the available pool. Finally, there is a simple winning logic for when one player runs out of game pieces to play. 
 
-## • Future development
-  * Implement friend vs foe: the current demo does not consider friends or foes which means it is possible to launch attack on your own pieces which is not part of the game.
-  * Implement the Catapult piece: since this piece has an unique attacking pattern, it will require a new set of logic
-  * Implement piece identification: the current demo cannot handle when there are mutliple of the same pieces being on the board
-  * Resolve existing bugs: the current demo still has bugs that allows pieces to move to areas where it is prohibited.
+## • Future developments
+  * Resolve existing bugs: the current demo still has couple bugs, one such will allow pieces to move to areas where it is prohibited.
+  * Implement friend vs foe: the current demo does not consider friend or foe pieces which means it is possible to launch attack on your own pieces which is not part of the game.
+  * Implement the Catapult piece: since this piece has an unique attacking pattern, it will require a new set of logic.
+  * Implement piece identification: the current demo cannot handle when there are mutliple of the same pieces being on the board.
+  * Major CSS overhaul: for the purpose of the demo, there's very minimal CSS.
+  * Refactor the app by using better technologies such as React.
 
 ## • Technologies used
 * JavaScript
