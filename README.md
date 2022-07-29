@@ -2,7 +2,10 @@
 
 ![banner_image](https://i.imgur.com/GUqHeTq.png)
 ## • Introduction
-Shadow Chess is a combination of the western chess and [a popular game variation of the Chinese chess named "Banqi"](https://en.wikipedia.org/wiki/Banqi), which means half chess, or "Anqi", which means dark chess. In this game variation, only half of the regular Chinese chess board is required and all of the 32 chess pieces are placed facing down so the players do not know which piece is which, hence, "half" or "dark chess". In this casual board game, player's luck will heavily dictate the outcome. Are you feeling lucky today?
+Shadow Chess is a combination of the western chess and [a popular game variation of the Chinese chess named "Banqi"](https://en.wikipedia.org/wiki/Banqi), which means half chess, or "Anqi", which means dark chess. In this game variation, only half of the regular Chinese chess board is required and all of the 32 chess pieces are placed facing down so the players do not know which piece is which, hence, "half" or "dark chess". In this casual board game, player's luck will heavily dictate the outcome. 
+
+Are you feeling lucky today? 
+#### [Try your luck here!](https://buudee625.github.io/proj-shadow-chess/)
 
 ## • Game rules
 In Shadow Chess, player Bloom (represented by blue pieces) will play against player Redd (represented by red pieces). At the start of the game, a total of 32 chess pieces, 16 for each player, are randomly distributed across the 8 x 4 game board with the pieces facing down. The game will randomly decide which player goes first, and each player takes one turn to flip a piece over, or move one of their pieces. Every piece is limited to moving one grid directly next to itself, which means diagonal movements are prohibited. 
@@ -29,8 +32,12 @@ The ranking hierarchy is demonstrated below. The higher ranked piece can defeat 
 * Catapult: 2
 
 ## • Game screenshots
-![gameplay_screenshot1](https://i.imgur.com/DgvGoQJ.png)
-![gameplay_screenshot2](https://i.imgur.com/Uc8Bgbs.png)
+![gameplay_screenshot01](https://i.imgur.com/DgvGoQJ.png)
+![gameplay_screenshot02](https://i.imgur.com/Uc8Bgbs.png)
+
+## • Development plan
+This is the very first wireframe draft
+![wireframe01](https://i.imgur.com/1TEVRE4.png)
 
 ## • Current development
 The current MVP is set up for demonstration purposes only. In this demo, players are able to move pieces around, launch attack on opponent's piece or flip over one of the four undiscovered pieces. When a player flips over the undiscovered piece, the program will randomly assign it a color and rank from the available pool. Finally, there is a simple winning logic for when one player runs out of game pieces to play. 
