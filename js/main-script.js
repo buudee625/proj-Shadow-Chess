@@ -40,7 +40,7 @@ const pieces = {
 
 //State variables
 //==============================================//
-let turnCounter = true; //true = red's turn; false = blue's turn
+let turnCounter = Math.random() < 0.5; //true = Redd; false = Bloom
 let pieceCounterRed = 0;
 let pieceCounterBlue = 0;
 let cellID;
@@ -53,9 +53,11 @@ let moveDownID;
 let moveRightID;
 let moveLeftID;
 let validMoveArr = [];
+const avaBtns = ['queen','bishop','rook','knight'];
 
 //Cached Elements
 //==============================================//
+
 const boardEl = document.querySelector('.main-board'); // the main game board
 const defeatZone = document.querySelector('.defeat-zone'); // defeat zone
 const blueBox = document.querySelector('.blue-side'); // player's box
@@ -64,23 +66,15 @@ const bSideMid = document.querySelector('.b-side-mid') // players' selected piec
 const rSideMid = document.querySelector('.r-side-mid') 
 const bSideBottom = document.querySelector('.b-side-bottom') // players' remainder count
 const rSideBottom = document.querySelector('.r-side-bottom')
-
-
+let unflipButtons = document.querySelectorAll('.unflip') // all of the unflipped buttons
 
 
 //Functions
 //==============================================//
 function init(){
     // determines who goes first by using a random boolean generator
-    const randomBool = Math.random() < 0.5;
-    turnCounter = randomBool;
     switchTurn();
-    if (turnCounter == true) {
-        alert('Bloom goes first!');
-    } else {
-        alert('Redd goes first!');
-    }
-    // needs to randomly distribute all pieces on the board faced down (Not implemented)
+    turnCounter == true ? alert('Bloom goes first!') : alert('Redd goes first!');
 };
 init();
 
@@ -173,7 +167,7 @@ function moveableCells(cellID){
         document.getElementById(moveDownID),
         document.getElementById(moveLeftID) 
     ]};
-    console.log(validMoveArr);
+    // console.log(validMoveArr);
     return validMoveArr;
 };
 
@@ -194,18 +188,43 @@ function renderText() {
     };
 };
 
+// win/loss function, tie scenario is not yet implemented
 function gameRef(){
     if (pieceCounterRed == 0) {
         alert('Bloom emerges victorious!');
     } else if (pieceCounterBlue == 0) {
         alert('Redd emerges victorious!');
     }
-}
+};
+
+function flipButton(btn){
+    // Initialize a random index gen so we can randomly select an available piece from the avaBtns array, then set it as an id. 
+    let randomInd = Math.floor(Math.random() * avaBtns.length)
+    let btnID = avaBtns[randomInd]
+    let randomColor;
+    // Generate a random color so it can be assigned as the button's class
+    turnCounter == true ? randomColor = 'red' : randomColor = 'blue';
+    // Reassign the button's class, id and the face text
+    btn.classList.replace('unflip', randomColor);
+    btn.id = btnID;
+    btn.innerText = btnID;
+    // Finally, remove the piece from the array
+    avaBtns.splice(randomInd, 1);
+};
 
 //Event Listeners
 //==============================================//
 
-// everything starts with the dragstart event. when it occurs, the code needs to identify what piece was being dragged and set it to an variable because all of the following logic requires the knowledge of which piece was selected
+for (const i of unflipButtons) {
+    i.addEventListener('click', function(e){
+        flipButton(e.target);
+        switchTurn();
+        unflipButtons = document.querySelectorAll('.unflip');
+        console.log(unflipButtons);
+    }, {once : true});
+};
+
+// When a drag event occurs, the code needs to identify what piece was being dragged and set it to an variable because all of the following logic requires the knowledge of which piece was selected
 for (const pieceBtn of document.querySelectorAll('button')){
         pieceBtn.addEventListener('dragstart', function(e){
             // e.dataTransfer.setData('text/plain', e.target.id);
@@ -215,6 +234,8 @@ for (const pieceBtn of document.querySelectorAll('button')){
             renderText();
     });
 };
+
+// 
 
 boardEl.addEventListener('dragstart', function(e){
     // when a dragstart event occurs, identify the cell's ID by using the piece element that was dragged
@@ -237,8 +258,9 @@ boardEl.addEventListener('dragstart', function(e){
                 // if the target cell has no child element, append the selected piece
                 cells.appendChild(selectedPiece);
                 switchTurn();
-            // 2nd, if DC is occupied, is it a friendly piece or enemy piece? not yet implemented.
-            // 3rd, if it's an enemy piece, can user's selected piece beat the occupant piece?
+            // 2nd, if DC is occupied, is it a flipped piece or not? (not yet implemented)
+            // 3rd, if it's flipped, is it a friendly piece or enemy piece? (not yet implemented)
+            // 4th, if it's an enemy piece, can user's selected piece beat the occupant piece?
             } else {
                 // grab the child element's ID but since .children returns a HTMLCollection, we have to index into the first element (No cells should have more than one child). 
                 occupantPieceID = cells.children[0].id;
@@ -275,9 +297,7 @@ boardEl.addEventListener('dragstart', function(e){
 
 
 
-
-
 // List of problems:
-// self destructing behavior
-// pieces all have the same ID so there is no way the code is differetiating red/blue pieces
-// when mulitple of the same pieces are present on the board the code breaks 
+// self destructing behavior (temporarily resolved)
+// no friend/foe differentiation
+// code currently cannot handle when mulitple of the same pieces are present on the board 
