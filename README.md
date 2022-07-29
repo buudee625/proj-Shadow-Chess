@@ -2,10 +2,10 @@
 
 ![banner_image](https://i.imgur.com/GUqHeTq.png)
 ## • Introduction
-Shadow Chess is a combination of the western chess and [a popular game variation of the Chinese chess named "Banqi"](https://en.wikipedia.org/wiki/Banqi), which means half chess, or "Anqi", which means dark chess. In this game variation, only half of the regular Chinese board is required and all of the 32 chess pieces are placed with faced down so the players do not know which piece is which, hence, "half" or "dark chess".
+Shadow Chess is a combination of the western chess and [a popular game variation of the Chinese chess named "Banqi"](https://en.wikipedia.org/wiki/Banqi), which means half chess, or "Anqi", which means dark chess. In this game variation, only half of the regular Chinese chess board is required and all of the 32 chess pieces are placed facing down so the players do not know which piece is which, hence, "half" or "dark chess". In this casual board game, player's luck will heavily dictate the outcome. Are you feeling lucky today?
 
 ## • Game rules
-In Shadow Chess, player Bloom (represented by blue pieces) will play against player Redd (represented by red pieces). At the start of the game, a total of 32 chess pieces, 16 for each player, are randomly distributed faced down across a 8 x 4 game board, and the game will randomly decide which player goes first. Each player takes one turn to flip a piece over, or move one of their pieces around. Every piece is limited to moving one grid directly next to itself, which means diagonal movements are prohibited. 
+In Shadow Chess, player Bloom (represented by blue pieces) will play against player Redd (represented by red pieces). At the start of the game, a total of 32 chess pieces, 16 for each player, are randomly distributed across the 8 x 4 game board with the pieces facing down. The game will randomly decide which player goes first, and each player takes one turn to flip a piece over, or move one of their pieces. Every piece is limited to moving one grid directly next to itself, which means diagonal movements are prohibited. 
 
 To launch an attack, both pieces must be uncovered and the attacking piece must be ranked higher than the enemy piece. When a piece is defeated, it is removed from the board and will no longer be playable. All game pieces follow this attacking rule with the exception of the Catapult piece.
 
@@ -47,4 +47,4 @@ Currently we have set up the most basic game board with a few pieces placed on t
 ## • Credits
 * My beautiful partner Stephanie
 * Wonderful instructors from GA
-* Shireen Taj
+* CodePener Shireen Taj for the beautiful title CSS effect
