@@ -9,7 +9,7 @@ In Shadow Chess, player Bloom (represented by blue pieces) will play against pla
 
 To launch an attack, both pieces must be uncovered and the attacking piece must be ranked higher than the enemy piece. When a piece is defeated, it is removed from the board and will no longer be playable. All game pieces follow this attacking rule with the exception of the Catapult piece.
 
-When attacking with a Cataputl, there must be another piece, cover or uncovered, between the Catapult and the target enemy piece. As long as the condition is met, the Catapult's attack is not dictated by the rank hierarchy. This means the Catapult can defeat any pieces, including the enemy King and Catapults.
+When attacking with a Cataputl, there must be another piece, flipped or unflipped, between the Catapult and the target enemy piece. As long as the condition is met, the Catapult's attack is not dictated by the rank hierarchy. This means the Catapult can defeat any pieces, including the enemy King and Catapults.
 
 The game continues until either one side has no pieces left, or the game goes in a standstill scenario.
 
@@ -33,10 +33,13 @@ The ranking hierarchy is demonstrated below. The higher ranked piece can defeat 
 ![gameplay_screenshot2](https://i.imgur.com/Uc8Bgbs.png)
 
 ## • Current development
-Currently we have set up the most basic game board with a few pieces placed on the board for demonstration purposes. 
+The current MVP is set up for demonstration purposes only. In this demo, players are able to move pieces around, launch attack on opponent's piece or flip over one of the four undiscovered pieces. When a player flips over the undiscovered piece, the program will randomly assign it a color and rank from the available pool. Finally, there is a simple winning logic for when one player runs out of game pieces to play. 
 
 ## • Future development
-
+  * Implement friend vs foe: the current demo does not consider friends or foes which means it is possible to launch attack on your own pieces which is not part of the game.
+  * Implement the Catapult piece: since this piece has an unique attacking pattern, it will require a new set of logic
+  * Implement piece identification: the current demo cannot handle when there are mutliple of the same pieces being on the board
+  * Resolve existing bugs: the current demo still has bugs that allows pieces to move to areas where it is prohibited.
 
 ## • Technologies used
 * JavaScript
