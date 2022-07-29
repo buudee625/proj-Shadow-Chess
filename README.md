@@ -30,6 +30,7 @@ The ranking hierarchy is demonstrated below. The higher ranked piece can defeat 
 
 ## • Game screenshots
 ![gameplay_screenshot1](https://i.imgur.com/DgvGoQJ.png)
+![gameplay_screenshot2](https://i.imgur.com/Uc8Bgbs.png)
 
 ## • Current development
 Currently we have set up the most basic game board with a few pieces placed on the board for demonstration purposes. 

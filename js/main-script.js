@@ -53,7 +53,7 @@ let moveDownID;
 let moveRightID;
 let moveLeftID;
 let validMoveArr = [];
-const avaBtns = ['queen','bishop','rook','knight'];
+const avaPieces = ['queen','bishop','rook','knight'];
 
 //Cached Elements
 //==============================================//
@@ -66,7 +66,7 @@ const bSideMid = document.querySelector('.b-side-mid') // players' selected piec
 const rSideMid = document.querySelector('.r-side-mid') 
 const bSideBottom = document.querySelector('.b-side-bottom') // players' remainder count
 const rSideBottom = document.querySelector('.r-side-bottom')
-let unflipButtons = document.querySelectorAll('.unflip') // all of the unflipped buttons
+let unflipPieces = document.querySelectorAll('.unflip') // all of the unflipped pieces
 
 
 //Functions
@@ -174,6 +174,7 @@ function moveableCells(cellID){
 function pieceCounter(){
     pieceCounterRed = document.querySelectorAll('.red').length;
     pieceCounterBlue = document.querySelectorAll('.blue').length;
+    pieceCounterUnflip = document.querySelectorAll('.unflip').length;
 };
 
 function renderText() {
@@ -190,17 +191,17 @@ function renderText() {
 
 // win/loss function, tie scenario is not yet implemented
 function gameRef(){
-    if (pieceCounterRed == 0) {
+    if (pieceCounterRed == 0 && pieceCounterUnflip == 0) {
         alert('Bloom emerges victorious!');
-    } else if (pieceCounterBlue == 0) {
+    } else if (pieceCounterBlue == 0 && pieceCounterUnflip == 0) {
         alert('Redd emerges victorious!');
     }
 };
 
 function flipButton(btn){
-    // Initialize a random index gen so we can randomly select an available piece from the avaBtns array, then set it as an id. 
-    let randomInd = Math.floor(Math.random() * avaBtns.length)
-    let btnID = avaBtns[randomInd]
+    // Initialize a random index gen so we can randomly select an available piece from the avaPieces array, then set it as an id. 
+    let randomInd = Math.floor(Math.random() * avaPieces.length)
+    let btnID = avaPieces[randomInd]
     let randomColor;
     // Generate a random color so it can be assigned as the button's class
     turnCounter == true ? randomColor = 'red' : randomColor = 'blue';
@@ -209,18 +210,16 @@ function flipButton(btn){
     btn.id = btnID;
     btn.innerText = btnID;
     // Finally, remove the piece from the array
-    avaBtns.splice(randomInd, 1);
+    avaPieces.splice(randomInd, 1);
 };
 
 //Event Listeners
 //==============================================//
 
-for (const i of unflipButtons) {
+for (const i of unflipPieces) {
     i.addEventListener('click', function(e){
         flipButton(e.target);
         switchTurn();
-        unflipButtons = document.querySelectorAll('.unflip');
-        console.log(unflipButtons);
     }, {once : true});
 };
 
@@ -234,8 +233,6 @@ for (const pieceBtn of document.querySelectorAll('button')){
             renderText();
     });
 };
-
-// 
 
 boardEl.addEventListener('dragstart', function(e){
     // when a dragstart event occurs, identify the cell's ID by using the piece element that was dragged
